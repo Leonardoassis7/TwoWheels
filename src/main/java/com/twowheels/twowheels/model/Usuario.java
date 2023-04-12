@@ -3,10 +3,12 @@ package com.twowheels.twowheels.model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -14,6 +16,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@Entity
+@Table(name="tb_usuario")
 public class Usuario {
 	
 	@Id
@@ -23,6 +27,7 @@ public class Usuario {
 	@NotNull(message = "O atributo Nome é Obrigatório")
 	private String nome;
 	
+
 	@NotNull(message = "O Atributo Usuário é Obrigatório")
 	@Email(message = "O Atributo Usuario deve ser um email válido!")
 	private String usuario;
@@ -37,7 +42,7 @@ public class Usuario {
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagem;
-
+	
 	public Long getId() {
 		return id;
 	}
